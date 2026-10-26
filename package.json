@@ -1,0 +1,28 @@
+{
+  "name": "backend-ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Enzo Santoni",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "eslint . && nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.2",
+    "multer": "^2.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "nodemon": "^3.1.14"
+  }
+}

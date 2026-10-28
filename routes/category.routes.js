@@ -8,7 +8,7 @@ const isAdmin = require("../middlewares/isAdmin");
 
 
 // GET categories
-router.get("/categories",[auth, isAdmin],  categoryController.getCategories)
+router.get("/categories",  categoryController.getCategories)
 // POST categories
 router.post("/categories",[auth, isAdmin], categoryController.createCategory)
 // PUT categories

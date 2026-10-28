@@ -3,19 +3,26 @@ const Product = require("../models/product.model")
 
 
 async function getProducts(req, res) {
-    const page = +req.query.page || 0;
-    const limitProduct = +req.query.limit || 5;
-
-
     try {
+        const page = +req.query.page || 0;
+        const limitProduct = +req.query.limit || 5;
+
+        const filter = []
         
+        if(req.query.name) filter.push({name: {$regex: req.query.name, $options: 'i'}});
+        if(req.query.category) filter.push({category: req.query.category});
+        if(req.query.minPrice) filter.push({price: {$gte: req.query.minPrice}});
+        if(req.query.maxPrice) filter.push({price: {$lte: req.query.maxPrice}});
+        if(filter.length === 0) filter.push({});
+
+
         const [products, total] = await Promise.all([
-            Product.find()
+            Product.find({$and: filter})
                     .populate("category", "name")
                     .skip(page * limitProduct)
                     .limit(limitProduct),
             
-                    Product.countDocuments()
+                    Product.countDocuments({$and: filter})
         ])
         
         res.status(200).send({

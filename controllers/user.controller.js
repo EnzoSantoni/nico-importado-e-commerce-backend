@@ -36,7 +36,6 @@ async function getUserById(req, res) {
 async function getUsers(req, res) {
     
     try {
-        console.log(req.query)
         const limiteUsuarios = req.query.limit || 2;
         const page = req.query.page || 0;
 
@@ -222,8 +221,8 @@ async function login(req, res) {
 
         const token = jwt.sign(user.toJSON(), SECRET, {expiresIn: '1h'})
 
-        console.log(token)
 
+        // Guardar el token en mi userDB.token o en una colleccion aparte donde guarde los tokens
         // Generar un token de login
 
         // Si esta todo ok hacemos devolvemos una respuesta favorable

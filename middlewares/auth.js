@@ -1,6 +1,6 @@
 // Checkeamos si el usuario esta logueado y para eso vamos  a corroborar que tenga un token valido
 const jwt = require("jsonwebtoken");
-const SECRET = process.env.SECRET;
+const SECRET = process.env.JWT_SECRET;
 
 function jwtVerify(req, res, next) {
 

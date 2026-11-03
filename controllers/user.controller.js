@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-const SECRET = process.env.SECRET;
+const SECRET = process.env.JWT_SECRET;
 
 
 async function getUserById(req, res) {

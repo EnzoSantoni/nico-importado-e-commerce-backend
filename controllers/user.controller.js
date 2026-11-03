@@ -21,13 +21,13 @@ async function getUserById(req, res) {
 
         res.status(200).send({
             ok: true,
-            massege: "Se obtuvo el usuario correctamente",
+            message: "Se obtuvo el usuario correctamente",
             user
         })
     } catch (error) {
         console.log(error);
         res.status(500).send({
-            ok: true,
+            ok: false,
             message: "No se pudo obtener usuario"
         })
     }

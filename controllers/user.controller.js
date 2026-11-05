@@ -15,7 +15,7 @@ async function getUserById(req, res) {
         if(!user) {
             return res.status(404).send({
                 ok: false,
-                massege:"No se encontro el usuario"
+                message:"No se encontro el usuario"
             })
         }
 

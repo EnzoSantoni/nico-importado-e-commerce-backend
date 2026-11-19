@@ -3,37 +3,31 @@ const jwt = require("jsonwebtoken");
 const SECRET = process.env.JWT_SECRET;
 
 function jwtVerify(req, res, next) {
+  // const token = req.headers.authorization.split('')[1];
+  const token = req.headers.authorization;
 
-    
-    // const token = req.headers.authorization.split('')[1];
-    const token = req.headers.authorization;
+  // Checkear en la DB el valor de token que tiene actualmente el usuario y si el token que me mando no es el mismo retornar un 401
 
-    // Checkear en la DB el valor de token que tiene actualmente el usuario y si el token que me mando no es el mismo retornar un 401
+  // Checkeamos si nos enviaron un token, de no ser asi retornamos un 401: unauthorized
+  if (!token) {
+    return res.status(401).send({
+      ok: false,
+      message: "El token es requerido",
+    });
+  }
 
-
-    // Checkeamos si nos enviaron un token, de no ser asi retornamos un 401: unauthorized
-    if(!token) {
-        return res.status(401).send({
-            ok : false,
-            message: "El token es requerido"
-        })
+  jwt.verify(token, SECRET, (error, payload) => {
+    if (error) {
+      return res.status(401).send({
+        ok: false,
+        message: "Token vencido o invalido",
+      });
     }
 
-    jwt.verify(token, SECRET, (error, payload) => {
-        if(error) {
-            return res.status(401). send({
-                ok: false,
-                message: "Token vencido o invalido"
-            });
-        };
+    req.user = payload;
 
-        req.user = payload;
-
-        next();
-    })
+    next();
+  });
 }
 
-
-
-
-module.exports= jwtVerify;
+module.exports = jwtVerify;
